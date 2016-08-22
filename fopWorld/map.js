@@ -13,9 +13,9 @@ Map.prototype.get = function(x, y) {
 };
 Map.prototype.load = function(tab) {
   for (var i = 0; i < this.size * this.size; i++) {
-    if (tab[i] == '\n')
-      i++;
-    this.wallGrid[i] = tab[i] - '0';
+//    if (tab[i] == '\n')
+ //     i++;
+    this.wallGrid[i] = tab[i];// - '0';
   }
 };
 Map.prototype.randomize = function() {
