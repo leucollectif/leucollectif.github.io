@@ -14,7 +14,6 @@
     <script src="fopWorld/gameloop.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script>
     <script>
-      var tabMap = {0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0}
       var CIRCLE = Math.PI * 2;
       var MOBILE = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
       function Bitmap(src, width, height) {
@@ -25,21 +24,10 @@
       }
       var display = document.getElementById('display');
       var player = new Player(-1, 18, Math.PI * 0.3);
-      var map = new Map(4);
+      var map = new Map(32);
       var controls = new Controls();
       var camera = new Camera(display, MOBILE ? 160 : 320, 0.8);
       var loop = new GameLoop();
-      map.load(tabMap);
-//      map.randomize();
-/*      window.addEvent("domready",function(){
-          //Creating a new AJAX request that will request 'test.csv' from the current directory
-          var csvRequest = new Request({
-              url:"test.txt",
-              onSuccess:function(response){
-                map.load(response);
-              }
-          }).send(); //Don't forget to send our request!
-      });*/
 
       loop.start(function frame(seconds) {
         map.update(seconds);
