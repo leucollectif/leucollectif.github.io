@@ -34,6 +34,7 @@
           var csvRequest = new Request({
               url:"test.txt",
               onSuccess:function(response){
+console.log('youpi');
                 map.load(response);
               }
           }).send(); //Don't forget to send our request!
