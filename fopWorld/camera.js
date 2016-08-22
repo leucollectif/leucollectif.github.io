@@ -52,6 +52,7 @@ Camera.prototype.drawColumn = function(column, ray, angle, map) {
   var left = Math.floor(column * this.spacing);
   var width = Math.ceil(this.spacing);
   var hit = -1;
+//	console.log(typeof(ray));
   while (++hit < ray.length && ray[hit].height <= 0);
   for (var s = ray.length - 1; s >= 0; s--) {
     var step = ray[s];
