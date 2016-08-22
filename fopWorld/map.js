@@ -11,11 +11,13 @@ Map.prototype.get = function(x, y) {
   if (x < 0 || x > this.size - 1 || y < 0 || y > this.size - 1) return -1;
   return this.wallGrid[y * this.size + x];
 };
-/*Map.prototype.load = function() {
+Map.prototype.load = function(tab) {
   for (var i = 0; i < this.size * this.size; i++) {
-    this.wallGrid[i] = ;
+    if (tab[i] == '\n')
+      i++;
+    this.wallGrid[i] = tab[i] - '0';
   }
-};*/
+};
 Map.prototype.randomize = function() {
   for (var i = 0; i < this.size * this.size; i++) {
     this.wallGrid[i] = Math.random() < 0.3 ? 1 : 0;

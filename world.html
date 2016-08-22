@@ -1,16 +1,18 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Raycaster Demo - PlayfulJS</title>
+    <title>Le Collectif</title>
   </head>
   <body style='background: #000; margin: 0; padding: 0; width: 100%; height: 100%;'>
     <canvas id='display' width='1' height='1' style='width: 100%; height: 100%;' />
-    <script src="player.js"></script>
-    <script src="controls.js"></script>
-    <script src="map.js"></script>
-    <script src="camera.js"></script>
-    <script src="gameloop.js"></script>
+    <script src="fopWorld/player.js"></script>
+    <script src="fopWorld/controls.js"></script>
+    <script src="fopWorld/map.js"></script>
+    <script src="fopWorld/camera.js"></script>
+    <script src="fopWorld/gameloop.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script>
     <script>
       var CIRCLE = Math.PI * 2;
       var MOBILE = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
@@ -21,12 +23,21 @@
         this.height = height;
       }
       var display = document.getElementById('display');
-      var player = new Player(15.3, -1.2, Math.PI * 0.3);
+      var player = new Player(-1, 18, Math.PI * 0.3);
       var map = new Map(32);
       var controls = new Controls();
       var camera = new Camera(display, MOBILE ? 160 : 320, 0.8);
       var loop = new GameLoop();
-      map.randomize();
+//      map.randomize();
+      window.addEvent("domready",function(){
+          //Creating a new AJAX request that will request 'test.csv' from the current directory
+          var csvRequest = new Request({
+              url:"test.txt",
+              onSuccess:function(response){
+                map.load(response);
+              }
+          }).send(); //Don't forget to send our request!
+      });
 
       loop.start(function frame(seconds) {
         map.update(seconds);
