@@ -29,11 +29,11 @@
       var camera = new Camera(display, MOBILE ? 160 : 320, 0.8);
       var loop = new GameLoop();
 //      map.randomize();
+console.log('youpi');
       window.addEvent("domready",function(){
           //Creating a new AJAX request that will request 'test.csv' from the current directory
           var csvRequest = new Request({
               url:"test.txt",
-console.log('youpi');
               onSuccess:function(response){
                 map.load(response);
               }
