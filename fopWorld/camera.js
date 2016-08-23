@@ -48,7 +48,9 @@ Camera.prototype.drawWeapon = function(weapon, paces) {
 };
 Camera.prototype.drawColumn = function(column, ray, angle, map, decal) {
   var ctx = this.ctx;
+//  var texture = map.wall_tab_texture[parseInt(column / 32)];
   var texture = map.wallTexture;
+  var texture_tab = map.wall_tab_texture;
   var left = Math.floor(column * this.spacing);
   var width = Math.ceil(this.spacing);
   var hit = -1;
@@ -56,9 +58,15 @@ Camera.prototype.drawColumn = function(column, ray, angle, map, decal) {
   for (var s = ray.length - 1; s >= 0; s--) {
     var step = ray[s];
     if (typeof(s) == typeof(hit) && step.x > 0 && step.x < 32 && step.y > 0 && step.y < 32) {
+//      console.log(parseInt(step.x) + '	' + parseInt(step.y));
       var textureX = Math.floor(texture.width * step.offset);
+/*<<<<<<< HEAD
       var wall = this.project(step.height, angle, step.distance, decal);
       ctx.drawImage(texture.image, textureX, 0, 1, texture.height, left, wall.top, width, wall.height);
+=======*/
+      var wall = this.project(step.height, angle, step.distance);
+      ctx.drawImage(texture_tab[(parseInt(step.x + step.y)) % 10].image, textureX, 0, 1, texture.height, left, wall.top, width, wall.height);
+//>>>>>>> lapin
     }
   }
 };
