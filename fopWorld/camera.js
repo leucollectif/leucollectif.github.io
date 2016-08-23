@@ -64,7 +64,7 @@ Camera.prototype.drawColumn = function(column, ray, angle, map, decal) {
       var wall = this.project(step.height, angle, step.distance, decal);
       ctx.drawImage(texture.image, textureX, 0, 1, texture.height, left, wall.top, width, wall.height);
 =======*/
-      var wall = this.project(step.height, angle, step.distance);
+      var wall = this.project(step.height, angle, step.distance, decal);
       ctx.drawImage(texture_tab[(parseInt(step.x + step.y)) % 10].image, textureX, 0, 1, texture.height, left, wall.top, width, wall.height);
 //>>>>>>> lapin
     }
