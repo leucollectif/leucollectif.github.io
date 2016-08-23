@@ -1,3 +1,15 @@
+function init_texture()
+{
+  var	tab = [];
+  var vame = "";
+
+  for (var i = 0; i < 10; i++)
+  {
+    name = "assets/wall_" + i + ".jpg";
+	tab[i] = new Bitmap(name , 1024, 1024);
+  }
+  return (tab);
+}
 function Map(size) {
   this.size = size;
   this.wallGrid = [
@@ -39,6 +51,7 @@ function Map(size) {
 //  this.wallGrid = new Uint8Array(size * size);
   this.skybox = new Bitmap('assets/panorama.jpg', 2000, 750);
   this.wallTexture = new Bitmap('assets/wall_texture2.jpg', 1024, 1024);
+  this.wall_tab_texture = init_texture();
   this.light = 0;
 }
 Map.prototype.get = function(x, y) {
