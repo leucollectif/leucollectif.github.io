@@ -5,8 +5,8 @@ function Camera(canvas, resolution, focalLength) {
   this.resolution = resolution;
   this.spacing = this.width / resolution;
   this.focalLength = focalLength || 0.8;
-  this.range = MOBILE ? 8 : 14;
-  this.lightRange = 50;
+  this.range = MOBILE ? 8 : 32;
+  this.lightRange = 10;
   this.scale = (this.width + this.height) / 1200;
 }
 Camera.prototype.render = function(player, map) {
@@ -52,11 +52,10 @@ Camera.prototype.drawColumn = function(column, ray, angle, map) {
   var left = Math.floor(column * this.spacing);
   var width = Math.ceil(this.spacing);
   var hit = -1;
-//	console.log(typeof(ray));
   while (++hit < ray.length && ray[hit].height <= 0);
   for (var s = ray.length - 1; s >= 0; s--) {
     var step = ray[s];
-    if (s === hit) {
+    if (typeof(s) == typeof(hit) && step.x > 0 && step.x < 32 && step.y > 0 && step.y < 32) {
       var textureX = Math.floor(texture.width * step.offset);
       var wall = this.project(step.height, angle, step.distance);
       ctx.drawImage(texture.image, textureX, 0, 1, texture.height, left, wall.top, width, wall.height);
