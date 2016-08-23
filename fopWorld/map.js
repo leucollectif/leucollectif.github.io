@@ -37,7 +37,7 @@ function Map(size) {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 ];
 //  this.wallGrid = new Uint8Array(size * size);
-  this.skybox = new Bitmap('assets/panorama.jpg', 2000, 750);
+  this.skybox = new Bitmap('assets/panorama3.jpg', 1000, 375);
   this.wallTexture = new Bitmap('assets/wall_texture2.jpg', 1024, 1024);
   this.light = 0;
 }

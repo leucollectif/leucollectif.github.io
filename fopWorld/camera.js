@@ -10,17 +10,17 @@ function Camera(canvas, resolution, focalLength) {
   this.scale = (this.width + this.height) / 1200;
 }
 Camera.prototype.render = function(player, map) {
-  this.drawSky(player.direction, map.skybox, map.light);
+  this.drawSky(player.direction, player.decal, map.skybox, map.light);
   this.drawColumns(player, map);
   this.drawWeapon(player.weapon, player.paces);
 };
-Camera.prototype.drawSky = function(direction, sky, ambient) {
+Camera.prototype.drawSky = function(direction, decal, sky, ambient) {
   var width = sky.width * (this.height / sky.height) * 2;
   var left = (direction / CIRCLE) * -width;
   this.ctx.save();
-  this.ctx.drawImage(sky.image, left, 0, width, this.height);
+  this.ctx.drawImage(sky.image, left, decal, width, this.height);
   if (left < width - this.width) {
-    this.ctx.drawImage(sky.image, left + width, 0, width, this.height);
+    this.ctx.drawImage(sky.image, left + width, decal, width, this.height);
   }
   if (ambient > 0) {
     this.ctx.fillStyle = '#ffffff';
