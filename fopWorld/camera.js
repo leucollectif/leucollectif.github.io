@@ -35,7 +35,7 @@ Camera.prototype.drawColumns = function(player, map) {
     var x = column / this.resolution - 0.5;
     var angle = Math.atan2(x, this.focalLength);
     var ray = map.cast(player, player.direction + angle, this.range);
-    this.drawColumn(column, ray, angle, map);
+    this.drawColumn(column, ray, angle, map, player.decal);
   }
   this.ctx.restore();
 };
@@ -46,7 +46,7 @@ Camera.prototype.drawWeapon = function(weapon, paces) {
   var top = this.height * 0.6 + bobY;
   this.ctx.drawImage(weapon.image, left, top, weapon.width * this.scale, weapon.height * this.scale);
 };
-Camera.prototype.drawColumn = function(column, ray, angle, map) {
+Camera.prototype.drawColumn = function(column, ray, angle, map, decal) {
   var ctx = this.ctx;
   var texture = map.wallTexture;
   var left = Math.floor(column * this.spacing);
@@ -57,15 +57,15 @@ Camera.prototype.drawColumn = function(column, ray, angle, map) {
     var step = ray[s];
     if (typeof(s) == typeof(hit) && step.x > 0 && step.x < 32 && step.y > 0 && step.y < 32) {
       var textureX = Math.floor(texture.width * step.offset);
-      var wall = this.project(step.height, angle, step.distance);
+      var wall = this.project(step.height, angle, step.distance, decal);
       ctx.drawImage(texture.image, textureX, 0, 1, texture.height, left, wall.top, width, wall.height);
     }
   }
 };
-Camera.prototype.project = function(height, angle, distance) {
+Camera.prototype.project = function(height, angle, distance, decal) {
   var z = distance * Math.cos(angle);
   var wallHeight = this.height * height / z;
-  var bottom = this.height / 2 * (1 + 1 / z);
+  var bottom = this.height / 2 * (1 + 1 / z) + decal;
   return {
     top: bottom - wallHeight,
     height: wallHeight
