@@ -11,6 +11,7 @@ Amoureux des accents pleurez.
 Base sur les moteurs de raycasting type wolfenstein :
 - Fps ou l'on peut tourner la tete et avancer / reculer.
 - Physique limite avec seulement collision avec les murs.
+
 Todo :
 - Clean les mouvements de tete haut / bas.
 - Gerer la hauteur du perso -> escaliers, sauts, se baisser.
@@ -40,6 +41,3 @@ Controls :
 Gameloop :
 - Gere le callback de la boucle principale.
 
-
-
-### Ou pas.
