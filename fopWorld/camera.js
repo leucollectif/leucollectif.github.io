@@ -112,7 +112,7 @@ Camera.prototype.drawColumn = function(column, ray, angle, map, decal)
       var hitx = ray[hit].hit_coord[0];
       var hity = ray[hit].hit_coord[1];
       var wallTex = texture_tab[hitx + hity * map.size];
-      ctx.drawImage(wallTex.image, textureX, 0, 1, wallTex.height, left, wall.top, width, wall.height);
+      ctx.drawImage(wallTex.image, textureX, 0, 1, wallTex.height, left, wall.top + player.height, width, wall.height);
 // Draw floor starting from bottom of the wall ?
 //      ctx.drawImage(texture.image, textureX, 0, 1, texture.height, left, wall.bot, width, wall.height); 
     }
