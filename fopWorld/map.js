@@ -1,73 +1,47 @@
-function Map(size) {
+
+function Map(size, map, texMap) {
   this.size = size;
-  this.wallGrid = [
-9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
-9,2,3,4,5,5,5,5,5,5,5,5,5,5,5,4,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,1,3,4,5,5,5,5,5,5,5,5,5,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,1,3,4,5,5,5,0,1,1,0,1,0,0,5,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,1,3,4,5,5,5,1,1,0,1,0,0,0,5,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,1,3,4,5,5,5,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,1,3,4,5,5,5,1,1,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,1,3,4,5,5,5,5,1,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,2,3,4,5,5,5,5,5,0,5,5,5,5,5,4,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
-];
-//  this.wallGrid = new Uint8Array(size * size);
+  this.wallGrid = this.load(map);
   this.skybox = new Bitmap('assets/panorama3.jpg', 1000, 375);
   this.wallTexture = new Bitmap('assets/wall_texture2.jpg', 1024, 1024);
-  this.wall_tab_texture = this.init_texture();
+  this.wall_tab_texture = this.init_texture(texMap);
   this.light = 0;
 }
 Map.prototype.get = function(x, y) {
   x = Math.floor(x);
   y = Math.floor(y);
   if (x < 0 || x > this.size - 1 || y < 0 || y > this.size - 1) return -1;
-  return this.wallGrid[y * this.size + x];
+    return this.wallGrid[y * this.size + x];
+};
+Map.prototype.get_xy = function(x, y) {
+  x = Math.floor(x);
+  y = Math.floor(y);
+  if (x < 0 || x > this.size - 1 || y < 0 || y > this.size - 1) return -1;
+  return [x, y]
 };
 Map.prototype.load = function(tab) {
+  wallGrid = new Uint8Array(this.size * this.size);
   for (var i = 0; i < this.size * this.size; i++) {
 //    if (tab[i] == '\n')
  //     i++;
-    this.wallGrid[i] = tab[i];// - '0';
+    wallGrid[i] = tab[i];// - '0';
   }
+  return wallGrid;
 };
 Map.prototype.randomize = function() {
   for (var i = 0; i < this.size * this.size; i++) {
     this.wallGrid[i] = Math.random() < 0.3 ? 1 : 0;
   }
 };
-Map.prototype.init_texture = function() {
-  var	tab = [];
-  var vame = "";
-
-  for (var i = 0; i < 10; i++)
-  {
-    name = "assets/wall_" + i + ".jpg";
-	tab[i] = new Bitmap(name , 1024, 1024);
+Map.prototype.init_texture = function(tab) {
+  var name = "";
+  var wallTex = [];
+  console.log(this.size);
+  for (var i = 0; i < this.size * this.size; i++) {
+    name = "assets/wall_" + tab[i] + ".jpg";
+    wallTex[i] = new Bitmap(name , 1024, 1024);
   }
-  return (tab);
+  return (wallTex);
 }
 Map.prototype.cast = function(point, angle, range) {
   var self = this;
@@ -97,7 +71,10 @@ Map.prototype.cast = function(point, angle, range) {
   function inspect(step, shiftX, shiftY, distance, offset) {
     var dx = cos < 0 ? shiftX : 0;
     var dy = sin < 0 ? shiftY : 0;
+    var res = map.get(step.x - dx, step.y - dy);
     step.height = self.get(step.x - dx, step.y - dy);
+//    hit = self.get_xy(step.x - dx, step.y - dy);
+    step.hit_coord = self.get_xy(step.x - dx, step.y - dy);
     step.distance = distance + Math.sqrt(step.length2);
     if (shiftX) step.shading = cos < 0 ? 2 : 0;
     else step.shading = sin < 0 ? 2 : 1;
@@ -109,3 +86,5 @@ Map.prototype.update = function(seconds) {
   if (this.light > 0) this.light = Math.max(this.light - 10 * seconds, 0);
   else if (Math.random() * 5 < seconds) this.light = 2;
 };
+
+//  this.wallGrid = new Uint8Array(size * size);

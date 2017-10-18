@@ -22,8 +22,8 @@ Player.prototype.walk = function(distance, map) {
 Player.prototype.update = function(controls, map, seconds) {
   if (controls.left) this.rotate(-Math.PI * seconds);
   if (controls.right) this.rotate(Math.PI * seconds);
-  if (controls.q) this.upndown(-10);
-  if (controls.e) this.upndown(10);
-  if (controls.forward) this.walk(10 * seconds, map);
-  if (controls.backward) this.walk(-10 * seconds, map);
+  if (controls.down) this.upndown(-10);
+  if (controls.up) this.upndown(10);
+  if (controls.forward) this.walk(5 * seconds, map);
+  if (controls.backward) this.walk(-5 * seconds, map);
 };
