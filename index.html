@@ -1,43 +1,18 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Le Collectif</title>
   </head>
-  <body style='background: #000; margin: 0; padding: 0; width: 100%; height: 100%;'>
-    <canvas id='display' width='1' height='1' style='width: 100%; height: 100%;' />
-    <script src="fopWorld/player.js"></script>
-    <script src="fopWorld/controls.js"></script>
-    <script src="datMap.js"></script>
-    <script src="fopWorld/map.js"></script>
-    <script src="fopWorld/camera.js"></script>
-    <script src="fopWorld/gameloop.js"></script>
-    <script src="fopWorld/var_glob.js.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script>
-    <script>
-      var CIRCLE = Math.PI * 2;
-      var MOBILE = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
-      function Bitmap(src, width, height)
-      {
-        this.image = new Image();
-        this.image.src = src;
-        this.width = width;
-        this.height = height;
-      }
-      var display = document.getElementById('display');
-      var player = new Player(16, 1.1, Math.PI * 0.39);
-      var map = new Map(32, mapTab, texTab);
-      //var map = new Map(32);
-      var controls = new Controls();
-      var camera = new Camera(display, MOBILE ? 160 : 320, 0.8);
-      var loop = new GameLoop();
-
-      loop.start(function frame(seconds) {
-        map.update(seconds);
-        player.update(controls.states, map, seconds);
-        camera.render(player, map);
-      });
-    </script>
+  <body style='background-image: url("img/deep_white7.jpg"); '>
+    <div style='margin-left:25%; margin-top:10%;'>
+      <a href="world.html" alt="OldSckoolz">
+        <img src="img/background.jpg" style='width: 33%; height: auto'></img>
+      </a>
+      <a href="world2.html" alt="NiouSckoolz">
+        <img src="img/back2.jpg"  style='width: 33%; height: auto'></img>
+      </a>
+    </div>
   </body>
 </html>

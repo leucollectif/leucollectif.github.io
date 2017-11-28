@@ -2,8 +2,8 @@
 function Map(size, map, texMap) {
   this.size = size;
   this.wallGrid = this.load(map);
-  this.skybox = new Bitmap('assets/panorama3.jpg', 1000, 375);
-  this.wallTexture = new Bitmap('assets/wall_texture2.jpg', 1024, 1024);
+  this.skybox = new Bitmap('fopWorld/assets/panorama3.jpg', 1000, 375);
+  this.wallTexture = new Bitmap('fopWorld/assets/wall_texture2.jpg', 1024, 1024);
   this.wall_tab_texture = this.init_texture(texMap);
   this.light = 0;
 }
@@ -38,7 +38,7 @@ Map.prototype.init_texture = function(tab) {
   var wallTex = [];
   console.log(this.size);
   for (var i = 0; i < this.size * this.size; i++) {
-    name = "assets/wall_" + tab[i] + ".jpg";
+    name = "fopWorld/assets/wall_" + tab[i] + ".jpg";
     wallTex[i] = new Bitmap(name , 1024, 1024);
   }
   return (wallTex);

@@ -5,7 +5,7 @@ function Player(x, y, direction)
   this.direction = direction;
   this.decal = 0;
   this.height = 0;
-  this.weapon = new Bitmap('assets/hand.png', 319, 320);
+  this.weapon = new Bitmap('fopWorld/assets/hand.png', 319, 320);
   this.paces = 0;
 }
 
