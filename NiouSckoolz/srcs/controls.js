@@ -7,6 +7,7 @@ function Controls(windowHalfX, windowHalfY)
 					'forward': false, 'backward': false };
   this.winHalfX = windowHalfX;
   this.winHalfY = windowHalfY;
+  this.click = 0;
   this.mouse = new THREE.Vector2();
   this.last = new THREE.Vector2();
   this.decal = new THREE.Vector2();
@@ -17,6 +18,7 @@ function Controls(windowHalfX, windowHalfY)
   document.addEventListener('touchend', this.onTouchEnd.bind(this), false);
 
   document.addEventListener( 'mousemove', this.onMouseMove.bind(this), false );
+  document.addEventListener( 'click', this.onClick.bind(this), false );
 }
 
 Controls.prototype.onTouch = function(e)
@@ -50,8 +52,14 @@ Controls.prototype.onMouseMove = function(e)
 {
   this.last.x = this.mouse.x;
   this.last.y = this.mouse.y;
-  this.mouse.x = ( e.clientX - this.winHalfX ) / 2;
-  this.mouse.y = ( e.clientY - this.winHalfY ) / 2;
+  this.mouse.x = e.clientX/window.innerWidth -.5;//( e.clientX - this.winHalfX ) / 2 - 1;
+//  console.log();
+  this.mouse.y = e.clientY/window.innerHeight -.5;//( e.clientY - this.winHalfY ) / 2 - 1;
   this.decal.x = this.mouse.x - this.last.x;
   this.decal.y = this.mouse.y - this.last.y;
+}
+
+Controls.prototype.onClick = function(e)
+{
+  this.click = 1;
 }
