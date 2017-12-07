@@ -1,8 +1,8 @@
 function Controls(windowHalfX, windowHalfY)
 {
-  this.codes  = { 81: 'q', 69: 'e', 37: 'left', 65: 'left', 68: 'right',
-                  39: 'right', 87: 'up', 38: 'up', 83: 'down',
-                  40: 'down' };
+  this.codes  = { 81: 'up', 69: 'down', 37: 'left', 65: 'left', 68: 'right',
+                  39: 'right', 87: 'forward', 38: 'forward', 83: 'backward',
+                  40: 'backward' };
   this.states = { 'up': false, 'down': false, 'left': false, 'right': false,
 					'forward': false, 'backward': false };
   this.winHalfX = windowHalfX;

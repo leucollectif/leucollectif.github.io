@@ -27,6 +27,7 @@ function load_OBJ(scene, texture, obj, position, scale) {
     object.scale.x = scale.x;
     object.scale.y = scale.y;
     object.scale.z = scale.z;
+	object.renderingGroupId = 1;
     scene.add( object )
   }, onProgress, onError );
 }
