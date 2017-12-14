@@ -1,43 +1,118 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Le Collectif</title>
-  </head>
-  <body style='background: #000; margin: 0; padding: 0; width: 100%; height: 100%;'>
-    <canvas id='display' width='1' height='1' style='width: 100%; height: 100%;' />
-    <script src="fopWorld/player.js"></script>
-    <script src="fopWorld/controls.js"></script>
-    <script src="fopWorld/datMap.js"></script>
-    <script src="fopWorld/map.js"></script>
-    <script src="fopWorld/camera.js"></script>
-    <script src="fopWorld/gameloop.js"></script>
-    <script src="fopWorld/var_glob.js.js"></script>
-<!--        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script> -->
-    <script>
-      var CIRCLE = Math.PI * 2;
-      var MOBILE = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
-      function Bitmap(src, width, height)
-      {
-        this.image = new Image();
-        this.image.src = src;
-        this.width = width;
-        this.height = height;
-      }
-      var display = document.getElementById('display');
-      var player = new Player(16, 1.1, Math.PI * 0.39);
-      var map = new Map(32, mapTab, texTab);
-      //var map = new Map(32);
-      var controls = new Controls();
-      var camera = new Camera(display, MOBILE ? 160 : 320, 0.8);
-      var loop = new GameLoop();
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - loaders - OBJ loader</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#info {
+				color: #fff;
+				position: absolute;
+				top: 10px;
+				width: 100%;
+				text-align: center;
+				z-index: 100;
+				display:block;
+			}
+			#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+		</style>
+	</head>
 
-      loop.start(function frame(seconds) {
-        map.update(seconds);
-        player.update(controls.states, map, seconds);
-        camera.render(player, map);
-      });
-    </script>
-  </body>
+	<body>
+		<div id="info">
+		<a href="index.html">Home</a> - /!\ Pre alpha, game still in the gonades of its fathers...
+		</div>
+
+		<script src="three.min.js"></script>
+		<script src="srcs/OBJLoader.js"></script>
+		<script src="srcs/load_OBJ.js"></script>
+		<script src="srcs/controls.js"></script>
+		<script src="srcs/player.js"></script>
+		<script src="srcs/hud.js"></script>
+		<script src="srcs/map.js"></script>
+
+		<script>
+			var container;
+			var camera, scene, renderer;
+			var map, controls, player;
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				controls = new Controls(windowHalfX, windowHalfY);
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 4000 );
+				camera.position.z = 1450;
+				camera.position.y = 70;
+
+				// scene
+				scene = new THREE.Scene();
+				//scene.fog = new THREE.Fog( 0x000000, 1000, 2000);
+				var loader = new THREE.CubeTextureLoader();
+				loader.setPath( 'img/' );
+				var textureCube = loader.load( [
+					'side_low.jpg', 'side_low.jpg',
+					'side_low.jpg', 'side_low.jpg',
+					'side_low.jpg', 'side_low.jpg'
+				] );
+				scene.background = textureCube;
+
+				var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
+//				pointLight.position.y = 4500;
+				camera.add( pointLight );
+				scene.add( camera );
+
+//				camera.lookAt( scene.position );
+//				camera.rotation.order = "YXZ";
+
+				map = new Map( scene, camera, 1 );
+				player = new Player( scene, camera );
+
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				container.appendChild( renderer.domElement );
+
+				window.addEventListener( 'resize', onWindowResize, false );
+			}
+
+			function onWindowResize() {
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			function animate() {
+				requestAnimationFrame( animate );
+				render();
+			}
+
+			function render() {
+				player.update( controls, camera, scene );
+				renderer.render( scene, camera );
+				// Render HUD on top of the scene.
+//				renderer.render( player.hud.sceneHUD, player.hud.cameraHUD );
+			}
+
+		</script>
+
+	</body>
 </html>

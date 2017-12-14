@@ -6,13 +6,13 @@
     <title>Le Collectif</title>
   </head>
   <body ><!--style='background-image: url("img/deep_white7.jpg"); '>-->
-		<script src="NiouSckoolz/three.min.js"></script>
-		<script src="NiouSckoolz/srcs/OBJLoader.js"></script>
-		<script src="NiouSckoolz/srcs/load_OBJ.js"></script>
-		<script src="NiouSckoolz/srcs/controls.js"></script>
-		<script src="NiouSckoolz/srcs/player.js"></script>
-		<script src="NiouSckoolz/srcs/hud.js"></script>
-		<script src="NiouSckoolz/srcs/map.js"></script>
+		<script src="three.min.js"></script>
+		<script src="srcs/OBJLoader.js"></script>
+		<script src="srcs/load_OBJ.js"></script>
+		<script src="srcs/controls.js"></script>
+		<script src="srcs/player.js"></script>
+		<script src="srcs/hud.js"></script>
+		<script src="srcs/map.js"></script>
 	
 	<script>
 		
@@ -32,14 +32,22 @@
 
 				controls = new Controls(windowHalfX, windowHalfY);
 
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 4000 );
 				camera.position.y = 80;
 				camera.position.z = 300;
 
 				// scene
 				scene = new THREE.Scene();
-				scene.fog = new THREE.Fog( 0x000000, 1000, 2000);
-
+	//			scene.fog = new THREE.Fog( 0x000000, 1000, 2000);
+				var loader = new THREE.CubeTextureLoader();
+				loader.setPath( 'img/' );
+				var textureCube = loader.load( [
+					'side_low.jpg', 'side_low.jpg',
+					'side_low.jpg', 'side_low.jpg',
+					'side_low.jpg', 'side_low.jpg'
+				] );
+				scene.background = textureCube;
+//
 				var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
 				camera.add( pointLight );
 				scene.add( camera );
@@ -72,7 +80,6 @@
 
 			function render() {
 				player.update( controls, camera, scene );
-				map.skybox.position.copy( camera.position );
 				renderer.render( scene, camera );
 			}
 
