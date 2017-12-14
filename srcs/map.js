@@ -60,8 +60,20 @@ function Map( scene, camera, index ) {
 		var groundGeom = new THREE.CubeGeometry( 4000, 4, 4000, 1, 1, 1 );
 		var ground = new THREE.Mesh( groundGeom, groundMaterial );
 		scene.add( ground );
+
+		var listener = new THREE.AudioListener();
+		camera.add( listener );
+		var sound = new THREE.PositionalAudio( listener );
+		//Load a sound and set it as the PositionalAudio object's buffer
+		var audioLoader = new THREE.AudioLoader();
+		audioLoader.load( 'sounds/brazil.ogg', function( buffer ) {
+			sound.setBuffer( buffer );
+			sound.setRefDistance( 200 );
+			sound.play();
+		});
 		
-		load_OBJ(scene, "", "models/door.obj",
+		var model = load_OBJ(scene, "", "models/door.obj",
 				{x: 0, y: 0}, {x: 70, y: 70, z: 70});
+		ground.add( sound );
 	}
 }
