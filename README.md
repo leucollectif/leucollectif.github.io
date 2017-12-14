@@ -8,36 +8,27 @@ Amoureux des accents pleurez.
 
 ## Gameplay
 
-Base sur les moteurs de raycasting type wolfenstein :
-- Fps ou l'on peut tourner la tete et avancer / reculer.
-- Physique limite avec seulement collision avec les murs.
+Moteur simple, en webgl :
+- Vue fps ou l'on peut tourner la tete et avancer / reculer (ASDW, fleches).
+- Personnage en dessin, avec des sprites.
 
 Todo :
-- Clean les mouvements de tete haut / bas.
-- Gerer la hauteur du perso -> escaliers, sauts, se baisser.
+- Ajouter les mouvements de tete haut / bas.
+- Gerer les collisions du joueur -> escaliers, sauts, se baisser.
 
 ## Le code
 
-Pour l'instant du javascript vanilla, eventuellement du three.js plus tard pour
-executer le raycasting sur le GPU / incruster de beaux shaders de shadertoy.
+Pour l'instant du javascript vanilla, avec du three.js pour le contexte webgl.
 
 ### Les classes
 
 Map :
-- Charge le tableau de hauteur des murs et le tableaux des textures associes,
-  plus la skybox et bientot le sol.
-- Procedure de raycasting d'un rayon.
-
-Camera :
-- Gere l'affichage et l'appel au raycasting pour chaque colone de pixel.
-
+- Instancie la map, charge des objets.
+  
 Player :
 - Update la position et la direction du joueur en fonction des etats de controls
 
 Controls :
 - Detecte les evenements clavier / souris / touchscreen et update les etats
   correspondants.
-
-Gameloop :
-- Gere le callback de la boucle principale.
 
