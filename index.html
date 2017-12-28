@@ -8,6 +8,7 @@
   <body ><!--style='background-image: url("img/deep_white7.jpg"); '>-->
 		<script src="three.min.js"></script>
 		<script src="srcs/OBJLoader.js"></script>
+		<script src="srcs/MTLLoader.js"></script>
 		<script src="srcs/load_OBJ.js"></script>
 		<script src="srcs/controls.js"></script>
 		<script src="srcs/player.js"></script>
@@ -49,7 +50,12 @@
 				scene.background = textureCube;
 //
 				var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
-				camera.add( pointLight );
+				pointLight.decay = 2;
+				pointLight.distance = 3500;
+				pointLight.intensity = 3;
+				pointLight.translateOnAxis( { x:0, y:1, z:0 }, 500);
+				pointLight.translateOnAxis( { x:0, y:0, z:1 }, 250);
+				scene.add( pointLight );
 				scene.add( camera );
 
 				map = new Map( scene, camera, 0 );
@@ -80,6 +86,7 @@
 
 			function render() {
 				player.update( controls, camera, scene );
+				map.update();
 				renderer.render( scene, camera );
 			}
 
